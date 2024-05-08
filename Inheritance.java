@@ -204,6 +204,17 @@ Team_Lead("Yash","Pune","xyz",25 , 2, 1, 2004,937344786);
  t.output(); 
  break; 
 
+   case 3: 
+ Assistant_Project_Manager a=new
+Assistant_Project_Manager("Rohit","Pune","xyz",34 , 27, 12, 
+2004,937344786); 
+ a.display(); 
+ a.accept(); 
+ a.calculate(); 
+ a.output(); 
+ break; 
+
+
  
  case 4: 
  Project_Manager m=new
