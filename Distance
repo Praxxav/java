@@ -1,0 +1,120 @@
+#include <iostream>
+using namespace std;
+class feet_inch;
+class meter_centimeter
+{
+ int mt,cm;
+ public:
+ meter_centimeter(){
+ mt=0;
+ cm=0;
+ } 
+ void display();
+ meter_centimeter(int x,int y);
+ friend meter_centimeter add(meter_centimeter,feet_inch);
+ friend meter_centimeter sub(meter_centimeter,feet_inch);
+ friend feet_inch add(feet_inch ,meter_centimeter );
+};
+class feet_inch
+{
+ int ft,in;
+ public:
+ feet_inch(){
+ ft=0;
+ in=0;
+} 
+ void output();
+ feet_inch(int a,int b);
+ friend meter_centimeter add(meter_centimeter,feet_inch);
+ friend meter_centimeter sub(meter_centimeter,feet_inch);
+ friend feet_inch add(feet_inch ,meter_centimeter );
+};
+meter_centimeter::meter_centimeter(int x,int y)
+{
+ mt=x;
+ cm=y;
+}
+void meter_centimeter::display()
+{
+ cout<<"Value of meter:"<<mt;
+ cout<<"Value of centimeter:"<<mt;
+}
+feet_inch::feet_inch(int a,int b)
+{
+ ft=a;
+ in=b;
+}
+void feet_inch::output()
+{
+ cout<<"Value of feet: "<<ft;
+ cout<<"Value of inch: "<<in;
+}
+meter_centimeter add(meter_centimeter m,feet_inch f)
+{
+ meter_centimeter temp;
+ float cal;
+ cal=m.mt*100+m.cm+f.ft*30.82+f.in*2.54;
+ int result=cal;
+ temp.mt=result/100;
+ temp.cm=result%100;
+ return temp;
+}
+feet_inch add(feet_inch f,meter_centimeter m)
+{
+ feet_inch temp;
+ float cal=m.mt*39.37+m.cm*0.394+f.ft*12+f.in;
+ int result=cal;
+ temp.ft=result/12;
+ temp.in=result%12;
+ return temp;
+ }
+ 
+ meter_centimeter sub(meter_centimeter m,feet_inch f)
+ {
+ meter_centimeter temp1;
+ float cal;
+ cal=(m.mt*100+m.cm)-(f.ft*30.82+f.in*2.54);
+ int result=cal;
+ temp1.mt=result/100;
+ temp1.cm=result%100;
+ return temp1;
+ }
+ int main()
+{
+ int m,c,f,i,choice;
+ cout<<"Enter value of meter:"<<endl;
+ cin>>m;
+ cout<<"Enter the value of centimeter: "<<endl;
+ cin>>c;
+ cout<<"Enter value of feet: "<<endl;
+ cin>>f;
+ cout<<"Enter the value of inch: "<<endl;
+ cin>>i;
+ meter_centimeter m1(m,c),m2,m3;
+ feet_inch f1(f,i),f2;
+ 
+ m1.display();
+ f1.output();
+ m2=add(m1,f1);
+ //m2.display();
+ f2=add(f1,m1);
+ //m2.display();
+ 
+ m3=sub(m1,f1);
+ //m2.display();
+ 
+ cout<<"1.add in meter_centimeter";
+ cout<<"2.add in feet_inch";
+ cout<<"3.sub in meter_centimeter";
+ cout<<"Enter your choice:";
+ cin>>choice;
+ switch(choice)
+ {
+ case 1:m2.display();
+ break;
+ case 2:f2.output();
+ break;
+ case 3:m3.display();
+ break;
+ }
+ }
